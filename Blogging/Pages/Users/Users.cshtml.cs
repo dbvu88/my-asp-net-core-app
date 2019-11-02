@@ -18,6 +18,9 @@ namespace Blogging.Pages.Users
         public string Message;
         public IEnumerable<User> Users;
 
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
+
         public UsersModel(IConfiguration config, IUserData userData)
         {
             this.config = config;
@@ -25,8 +28,9 @@ namespace Blogging.Pages.Users
         }
         public void OnGet()
         {
+
             Message = config["Message"];
-            Users = userData.GetAll();
+            Users = userData.GetUsersByUsername(SearchTerm);
         }
     }
 }

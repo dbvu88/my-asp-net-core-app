@@ -8,6 +8,7 @@ namespace Blogging.Data
     public interface IUserData
     {
         IEnumerable<User> GetAll();
+        IEnumerable<User> GetUsersByUsername(string username);
     }
     public class InMemmoryData : IUserData
     {
@@ -23,7 +24,17 @@ namespace Blogging.Data
         }
         public IEnumerable<User> GetAll()
         {
-            return from user in users orderby user.Username select user;
+            return from user in users 
+                   orderby user.Username 
+                   select user;
+        }
+
+        public IEnumerable<User> GetUsersByUsername(string username = null)
+        {
+            return from user in users
+                   where string.IsNullOrEmpty(username) || user.Username.Contains(username)
+                   orderby user.Username 
+                   select user;
         }
     }
 }
