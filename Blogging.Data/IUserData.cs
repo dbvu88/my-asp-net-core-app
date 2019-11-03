@@ -9,6 +9,7 @@ namespace Blogging.Data
     {
         IEnumerable<User> GetAll();
         IEnumerable<User> GetUsersByUsername(string username);
+        User GetById(int id);
     }
     public class InMemmoryData : IUserData
     {
@@ -22,10 +23,11 @@ namespace Blogging.Data
                 new User { Id = 3, Username = "WickedAndy", Bio = "I do science", Role = Role.Member },
             };
         }
+
         public IEnumerable<User> GetAll()
         {
-            return from user in users 
-                   orderby user.Username 
+            return from user in users
+                   orderby user.Username
                    select user;
         }
 
@@ -33,8 +35,12 @@ namespace Blogging.Data
         {
             return from user in users
                    where string.IsNullOrEmpty(username) || user.Username.Contains(username)
-                   orderby user.Username 
+                   orderby user.Username
                    select user;
+        }
+
+        public User GetById(int id) {
+            return users.SingleOrDefault(r => r.Id == id);
         }
     }
 }

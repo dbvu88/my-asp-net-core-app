@@ -28,7 +28,6 @@ namespace Blogging.Pages.Users
         }
         public void OnGet()
         {
-
             Message = config["Message"];
             Users = userData.GetUsersByUsername(SearchTerm);
         }

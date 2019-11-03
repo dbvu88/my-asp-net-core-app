@@ -1,0 +1,12 @@
+﻿@page "{userId:int}"
+@model Blogging.Pages.Users.UserModel
+@{
+    ViewData["Title"] = Model.User.Username;
+    Layout = "~/Pages/Shared/_Layout.cshtml";
+}
+
+<h1>@Model.User.Username</h1>
+<p>Bio: @Model.User.Bio</p>
+<p>Role: @Model.User.Role</p>
+
+<a asp-page="./Users" class="btn btn-outline-success">All Users</a>
